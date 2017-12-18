@@ -41,7 +41,7 @@ RUN chmod -R 777 /var/www/html/opencart
 RUN mv /var/www/html/opencart/config-dist.php /var/www/html/opencart/config.php
 RUN mv /var/www/html/opencart/admin/config-dist.php /var/www/html/opencart/admin/config.php
 
-# CleanUp
+# Clean Up
 RUN apt-get remove -y \
         wget \
         unzip \
