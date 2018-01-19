@@ -1,21 +1,19 @@
-nginx:
-  image: nginx:latest
+apache2:
+  image: lzrbear/docker-apache2-ubuntu
   ports:
     - "80:80"
   volumes:
-    - ./app:/usr/share/nginx/html
-    - ./nginx/nginx.conf:/etc/nginx/nginx.conf:rw
-    - ./nginx/conf.d/:/etc/nginx/conf.d/:rw
+    - ./opencart:/var/www/html/opencart
   links:
-    - fpm:__DOCKER_PHP_FPM__
+    - phpfpm:__DOCKER_PHP_FPM__
 
-fpm:
-  build: ./php-fpm
+phpfpm:
+  build: ./phpfpm
   ports:
     - "9000"
   volumes:
-    - ./app:/usr/share/nginx/html
-    - ./php-fpm/php.ini-production:/usr/local/etc/php/php.ini:rw
+    - ./opencart:/var/www/html/opencart
+    - ./phpfpm/php.ini-production:/usr/local/etc/php/php.ini:rw
   links:
     - mysql:mysql
 
